@@ -31,26 +31,29 @@ public class TradeFlowService {
 
     public Map<String, Object> saveTradeObject(TradeFlowModel tradeModel) {
         int status = 0;
-        int maxVersion = 0;
+        int minVersion = 0;
         String tradeid = "";
         Map<String, Object> mapStatusObject = new HashMap<String, Object>();
         Date todayDate = new Date(System.currentTimeMillis());
         int dateCompare = tradeModel.getMaturity_date().compareTo(todayDate);
 
-        tradeModel.setCreated_date(todayDate);
-        tradeModel.setExpired("N");
+        if(tradeModel.getCreated_date() == null)
+            tradeModel.setCreated_date(todayDate);
+        if(tradeModel.getExpired() == null || tradeModel.getExpired().equals(""))
+            tradeModel.setExpired("N");
 
-        Object maxObjVersion = tradeJpa.getMaxVersion();
-        if (maxObjVersion != null)
-            maxVersion = (Integer) maxObjVersion;
+        Object minObjVersion = tradeJpa.getMinVersion();
+        if (minObjVersion != null)
+            minVersion = (Integer) minObjVersion;
 
-        if (tradeModel.getVersion() < maxVersion) {
+        Object tradeObjid = tradeJpa.getTradeIdByVersion(tradeModel.getVersion());
+        if (tradeObjid != null)
+            tradeid = (String) tradeObjid;
+
+        if (tradeModel.getVersion() < minVersion) {
             mapStatusObject.put("status", "The lower version of trade is being received and rejected");
             status = 1;
-        } else if (tradeModel.getVersion() == maxVersion) {
-            Object tradeObjid = tradeJpa.getTradeIdByVersion(tradeModel.getVersion());
-            if (tradeObjid != null)
-                tradeid = (String) tradeObjid;
+        } else if (!tradeid.equals("")) {
             if (dateCompare < 0)
                 mapStatusObject.put("status", "The trade has less maturity date then today date");
             else {

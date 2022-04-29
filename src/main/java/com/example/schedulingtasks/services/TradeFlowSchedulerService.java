@@ -31,29 +31,29 @@ public class TradeFlowSchedulerService {
         this.tradeJpa = tradeJpa;
     }
 
-    /* Is used to update the expire flag if in a store the trade crosses the maturity date only */
-
-    @Async
-    @Scheduled(cron = "${interval-in-cron}")
-    @SchedulerLock(name = "updateExpiryFlag", lockAtLeastFor = "1s", lockAtMostFor = "30s")
-    public void updateExpiryFlag() {
-        Date todayDate = new Date(System.currentTimeMillis());
-        int updateStatus = tradeJpa.updateExpiryFlag(todayDate);
-        if(updateStatus != 0){
-            log.info("Updated Successfully!!!!!!!");
-        }
-    }
-
-    /* Is used to update the expire flag if in a store the trade crosses the maturity date only for dummy purpose only*/
-
-    @Async
-    @Scheduled(cron = "${interval-in-cron}")
-    @SchedulerLock(name = "updateExpiryFlag", lockAtLeastFor = "1s", lockAtMostFor = "30s")
-    public void updateExpiryFlagSummy() {
-        Date todayDate = Date.valueOf("2022-07-21");
-        int updateStatus = tradeJpa.updateExpiryFlag(todayDate);
-        if(updateStatus != 0){
-            log.info("Updated Successfully!!!!!!!");
-        }
-    }
+//    /* Is used to update the expire flag if in a store the trade crosses the maturity date only */
+//
+//    @Async
+//    @Scheduled(cron = "${interval-in-cron}")
+//    @SchedulerLock(name = "updateExpiryFlag", lockAtLeastFor = "1s", lockAtMostFor = "30s")
+//    public void updateExpiryFlag() {
+//        Date todayDate = new Date(System.currentTimeMillis());
+//        int updateStatus = tradeJpa.updateExpiryFlag(todayDate);
+//        if(updateStatus != 0){
+//            log.info("Updated Successfully!!!!!!!");
+//        }
+//    }
+//
+//    /* Is used to update the expire flag if in a store the trade crosses the maturity date only for dummy purpose only*/
+//
+//    @Async
+//    @Scheduled(cron = "${interval-in-cron}")
+//    @SchedulerLock(name = "updateExpiryFlag", lockAtLeastFor = "1s", lockAtMostFor = "30s")
+//    public void updateExpiryFlagSummy() {
+//        Date todayDate = Date.valueOf("2022-07-21");
+//        int updateStatus = tradeJpa.updateExpiryFlag(todayDate);
+//        if(updateStatus != 0){
+//            log.info("Updated Successfully!!!!!!!");
+//        }
+//    }
 }

@@ -46,12 +46,11 @@ public class TradeFlowModel {
     public TradeFlowModel() {
     }
 
-    public TradeFlowModel(int version, String counter_party_id, String book_id, Date maturity_date, Date created_date, String expired) {
+    public TradeFlowModel(int version, String counter_party_id, String book_id, Date maturity_date, String expired) {
         this.version = version;
         this.counter_party_id = counter_party_id;
         this.book_id = book_id;
         this.maturity_date = maturity_date;
-        this.created_date = created_date;
         this.expired = expired;
     }
 

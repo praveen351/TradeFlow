@@ -20,6 +20,9 @@ public interface TradeFlowJpa extends JpaRepository<TradeFlowModel, String> {
     @Query(value = "SELECT max(version) FROM Trademodel", nativeQuery = true)
     Object getMaxVersion();
 
+    @Query(value = "SELECT min(version) FROM Trademodel", nativeQuery = true)
+    Object getMinVersion();
+
     @Query(value = "SELECT tradeid FROM Trademodel where version=:version", nativeQuery = true)
     Object getTradeIdByVersion(@Param("version") int version);
 
