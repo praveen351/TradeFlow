@@ -49,7 +49,7 @@ public class TradeFlowController {
 
     /* Is used to update the expire flag if in a store the trade crosses the maturity date  only for demo purpose*/
 
-    @GetMapping("/changeDate")
+    @PutMapping("/changeDate")
     public int changeDate() {
         Date todayDate = Date.valueOf("2022-07-21");
         return tradeService.updateExpiryFlag(todayDate);

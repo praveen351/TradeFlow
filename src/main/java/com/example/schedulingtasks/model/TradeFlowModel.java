@@ -54,6 +54,21 @@ public class TradeFlowModel {
         this.expired = expired;
     }
 
+    public TradeFlowModel(int version, String counter_party_id, String book_id, Date maturity_date, Date created_date) {
+        this.version = version;
+        this.counter_party_id = counter_party_id;
+        this.book_id = book_id;
+        this.maturity_date = maturity_date;
+        this.created_date = created_date;
+    }
+
+    public TradeFlowModel(int version, String counter_party_id, String book_id, Date maturity_date) {
+        this.version = version;
+        this.counter_party_id = counter_party_id;
+        this.book_id = book_id;
+        this.maturity_date = maturity_date;
+    }
+
     public String getTradeid() {
         return tradeid;
     }
